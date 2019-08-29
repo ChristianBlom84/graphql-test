@@ -13,14 +13,6 @@ let posts = [
 const resolvers = {
 	Query: {
 		info: () => `Hello and welcome to the API v0.0.1!`,
-		posts: (root, args, context, info) => {
-			return context.prisma.posts();
-		},
-		post: (root, args, context, info) => {
-			return context.prisma.post({
-				id: args.id
-			});
-		}
 	},
 	Post: {
 		id: (parent) => parent.id,
@@ -55,7 +47,7 @@ const resolvers = {
 
 // 3 server
 const server = new GraphQLServer({
-	typeDefs: './blog-schema.graphql',
+	typeDefs: './src/blog-schema.graphql',
 	resolvers,
 	context: { prisma }
 });

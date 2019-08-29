@@ -11,10 +11,29 @@ type Mutation {
 	updatePost(id: ID!, title: String!, content: String!): Post!
 	# Delete a post
 	deletePost(id: ID!): Post!
+	
+	# Signup a user
+	signup(name: String!, email: String!, password: String!): AuthPayload
+	# Login a user
+	login(email: String!, password: String!): AuthPayload
 }
 
 type Post {
 	id: ID!
 	title: String!
 	content: String!
+	createdBy: User
+}
+
+type User {
+	id: ID!
+	name: String!
+	email: String!
+	password: String!
+	posts: [Post!]!
+}
+
+type AuthPayload {
+	token: String!
+	user: User
 }
